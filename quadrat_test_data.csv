@@ -1,0 +1,51 @@
+quadrat,year,month,USDA_code,scientific_name,common_name,duration,form,density
+A1,1915,10,ASTRA,Astragalus spp.,milkvetch,.,forb,11
+A1,1915,10,EVNU,Evolvulus nuttallianus,shaggy dwarf morning-glory,P,forb,2
+A1,1915,6,EVNU,Evolvulus nuttallianus,shaggy dwarf morning-glory,P,forb,1
+A1,1915,6,IPOMO,Ipomopsis spp.,morning-glory,A,forb,5
+A1,1915,10,pecti,Pectis spp.,chichweed,A,forb,>10
+A1,1915,6,PORTU,Portulaca spp.,purslane,.,forb,1
+A1,1915,10,PORTU,Portulaca spp.,purslane,.,forb,5
+A1,1915,10,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,2
+A1,1915,6,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,2
+A2,1915,10,ASTRA,Astragalus spp.,milkvetch,.,forb,6
+A2,1915,10,ERIGE2,Erigeron spp.,fleabane,.,forb,1
+A2,1915,6,POJA5,Pomaria jamesii,James's hog-potato,P,forb,2
+A2,1915,10,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,3
+A2,1915,6,2FORB,Unknown forb,unidentified forb,.,forb,1
+A3,1915,10,ERIOG,Eriogonum spp.,buckwheat,A,forb,2
+A3,1915,10,PECTI,Pectis spp.,chichweed,A,forb,0
+A3,1915,10,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,2
+A3,1915,6,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,2
+A3,1915,6,SPHAE,Sphaeralcea spp.,globemallow,P,forb,1
+A3,1915,6,2PLANT,Unknown plant,unidentified plant,.,.,1
+A4,1915,6,AMSIN,Amsinckia spp.,fiddleneck,A,forb,2
+A4,1915,6,ERIGE2,Erigeron spp.,fleabane,.,forb,1
+,1915,10,ERIOG,Eriogonum spp.,buckwheat,A,forb,1
+A4,1915,6,LIAU4,Linum australe,southern flax,P,forb,1
+A4,1915,6,PLANT,Plantago spp.,plantain,A,forb,1
+A4,1915,6,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,1
+A4,1915,6,SOEL,Solanum elaeagnifolium,silver nightshade,P,forb,1
+A4,1915,10,SOEL,Solanum elaeagnifolium,silver nightshade,P,forb,1
+A4,1915,10,2PLANT,Unknown plant,unidentified plant,.,.,1
+B1,1915,10,ASTRA,Astragalus spp.,milkvetch,.,forb,2
+B1,1915,6,BAMU,Baileya multiradiata,desert marigold,P,forb,3
+B1,1915,6,LESQU,Lesquerella spp.,bladderpod,.,forb,2
+B1,1915,10,PECTI,Pectis spp.,chichweed,A,forb,2
+b1,1915,10,PORTU,Portulaca spp.,purslane,.,forb,
+B2,1915,10,SOEL,Solanum elaeagnifolium,silver nightshade,P,forb,1
+B2,1915,6,SOEL,Solanum elaeagnifolium,silver nightshade,P,forb,1
+B3,1915,6,LIAU4,Linum australe,southern flax,P,forb,1
+B3,1915,10,PECTI,Pectis spp.,chichweed,A,forb,5
+B3,1915,6,PLANT,Plantago spp.,plantain,A,forb,4
+B3,1915,10,,Pomaria jamesii,James's hog-potato,P,forb,1
+B3,1915,6,POJA5,Pomaria jamesii,James's hog-potato,P,forb,1
+B3,1915,6,POJA5,Pomaria jamesii,James's hog-potato,P,forb,3
+B3,1915,10,PORTU,Portulaca spp.,purslane,.,forb,1
+B3,1915,10,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,1
+B3,1915,6,SEBA3,Senna bauhinioides,twinleaf senna,P,forb,1
+B4,1915,10,ASTRA,Astragalus spp.,milkvetch,.,forb,4
+B4,1915,6,ASTRA,Astragalus spp.,milkvetch,.,forb,1
+B4,1915,10,EUPHO,Euphorbia spp.,spurge,.,forb,4
+B4,1915,10,PECTI,Pectis spp.,chichweed,A,forb,6
+B4,1915,10,POJA5,Pomaria jamesii,James's hog-potato,P,forb,1
