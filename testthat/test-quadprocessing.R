@@ -3,12 +3,12 @@ library(dplyr)
 context("tests quadrat quality control functions")
 
 
-testfile = '../../quadrat_test_data.csv'
+testfile = '../quadrat_test_data.csv'
 testdat = read.csv(testfile, stringsAsFactors = F)
 
 # supplementary files
-splist = read.csv('../../test_JRN_plant_species.csv', stringsAsFactors = F)
-quaddates = read.csv('../../test_quadrat_dates.csv', stringsAsFactors = F)
+splist = read.csv('../test_JRN_plant_species.csv', stringsAsFactors = F)
+quaddates = read.csv('../test_quadrat_dates.csv', stringsAsFactors = F)
 quadlist = unique(quaddates$quadrat)
 
 test_that("check_quadrat_names catches invalid quadrat names", {
