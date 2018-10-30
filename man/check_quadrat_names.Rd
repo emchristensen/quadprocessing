@@ -2,12 +2,12 @@
 % Please edit documentation in R/quadrat_qc_functions.R
 \name{check_quadrat_names}
 \alias{check_quadrat_names}
-\title{Check quadrat names}
+\title{Check for invalid quadrat names}
 \usage{
 check_quadrat_names(df, column_name, quadratlist)
 }
 \arguments{
-\item{df}{Data frame of quadrat data to validate}
+\item{df}{Data frame of quadrat data}
 
 \item{column_name}{Name of column in df containing quadrat names}
 
@@ -18,7 +18,9 @@ Rows from df containing invalid quadrat names, plus additional columns indicatin
        If there are no errors, this will return an empty data frame.
 }
 \description{
-Check a dataframe of quadrat data for valid quadrat names. Will flag quadrat names that are the incorrect case (upper/lower), or NA and missing values
+Check a dataframe of quadrat data for invalid quadrat names. This function will
+  flag quadrat names that are the incorrect case (quadrat names are assumed to be all upper-case),
+  as well as NA and missing values.
 }
 \examples{
 check_quadrat_names(df = data, column_name = 'quadrat', quadratlist = dates$quadrat)

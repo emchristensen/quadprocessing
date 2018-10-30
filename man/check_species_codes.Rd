@@ -2,12 +2,12 @@
 % Please edit documentation in R/quadrat_qc_functions.R
 \name{check_species_codes}
 \alias{check_species_codes}
-\title{Check species codes}
+\title{Check for invalid species codes}
 \usage{
 check_species_codes(df, column_name, specieslist)
 }
 \arguments{
-\item{df}{Data frame of quadrat data to validate}
+\item{df}{Data frame of quadrat data}
 
 \item{column_name}{Name of column in df containing species codes}
 
@@ -18,7 +18,9 @@ Rows from df containing invalid species codes, plus additional columns indicatin
        If there are no errors, this will return an empty data frame.
 }
 \description{
-Check a dataframe of quadrat data for valid plant species codes. Will flag species codes that are the incorrect case (upper/lower), or NA and missing values
+Check a dataframe of quadrat data for invalid plant species codes. This function will
+  flag species codes that are the incorrect case (species codes are assumed to be in all upper-case),
+  as well as NA and missing values.
 }
 \examples{
 check_species_codes(dataframe, column_name = 'Species', specieslist = sp_list$USDA_codes)

@@ -7,18 +7,20 @@
 find_duplicate_rows(df, columns)
 }
 \arguments{
-\item{df}{Data frame of quadrat data to validate}
+\item{df}{Data frame of quadrat data}
 
-\item{columns}{Vector of column names that determine unique key}
+\item{columns}{Vector of column names that determine unique key. (e.g. columns = c('quadrat', 'date', 'species'))}
 }
 \value{
 Rows from df that are duplicates according to the given key, plus an additional column indicating error_type.
         If there are no errors, this will return an empty data frame.
 }
 \description{
-Check a data frame of quadrat data for duplicate data (possibly data entry error). User supplies list of column names that should define a unique entry (e.g. quadrat, date, species should be associated with a single value). Ignores rows with NA or missing values in the key columns
+Check a data frame of quadrat data for duplicate data (possibly data entry error). User supplies
+  list of "key" column names that should define a unique entry (e.g. quadrat, date, species should be associated with
+  a single count value). This function ignores rows with NA or missing values in the key columns.
 }
 \examples{
-find_duplicate_rows(df, columns = c('quadrat','year','month','USDA_code'))
+find_duplicate_rows(df, columns = c('quadrat', 'year', 'month', 'USDA_code'))
 
 }

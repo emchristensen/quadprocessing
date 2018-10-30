@@ -2,10 +2,13 @@
 
 #library(dplyr)
 
-#' @title Check quadrat names
-#' @description Check a dataframe of quadrat data for valid quadrat names. Will flag quadrat names that are the incorrect case (upper/lower), or NA and missing values
+#' Check for invalid quadrat names
 #'
-#' @param df Data frame of quadrat data to validate
+#' @description Check a dataframe of quadrat data for invalid quadrat names. This function will
+#'   flag quadrat names that are the incorrect case (quadrat names are assumed to be all upper-case),
+#'   as well as NA and missing values.
+#'
+#' @param df Data frame of quadrat data
 #' @param column_name Name of column in df containing quadrat names
 #' @param quadratlist Vector of valid quadrat names
 #'
@@ -22,10 +25,13 @@ check_quadrat_names = function(df, column_name, quadratlist) {
   return(badquad)
 }
 
-#' @title Check species codes
-#' @description Check a dataframe of quadrat data for valid plant species codes. Will flag species codes that are the incorrect case (upper/lower), or NA and missing values
+#' Check for invalid species codes
 #'
-#' @param df Data frame of quadrat data to validate
+#' @description Check a dataframe of quadrat data for invalid plant species codes. This function will
+#'   flag species codes that are the incorrect case (species codes are assumed to be in all upper-case),
+#'   as well as NA and missing values.
+#'
+#' @param df Data frame of quadrat data
 #' @param column_name Name of column in df containing species codes
 #' @param specieslist Vector of valid species codes
 #'
@@ -45,11 +51,14 @@ check_species_codes = function(df, column_name, specieslist) {
 }
 
 
-#' @title Find non-numeric data in data column
-#' @description Check a data frame of quadrat data for valid count/area data. Indicate name of column that should contain only numeric data (e.g. counts, area, or perimeter). Returns rows that are non-numeric or NA and missing values
+#' Find non-numeric data in a given column from a data frame
 #'
-#' @param df Data frame of quadrta data to validate
-#' @param column_name Name of column in df containing numeric data (e.g. density/area/perimeter)
+#' @description Check a data frame of quadrat data for invalid numeric data. The name of column to be checked must
+#'   be indicated (e.g. counts, area, perimeter). This function returns rows from the original data frame that contain
+#'   non-numeric (or NA or missing values) in the indicated column.
+#'
+#' @param df Data frame of quadrta data
+#' @param column_name Name of column in df containing numeric data (e.g. 'area')
 #'
 #' @return Rows from df containing non-numeric density/area values, plus additional columns indicating error_type and error_value.
 #'         If there are no errors, this will return an empty data frame.
@@ -66,12 +75,13 @@ find_nonnumeric_values = function(df, column_name) {
   return(badnumeric)
 }
 
-#' @title Check numeric range
+#' Check for invalid numeric range
 #'
-#' @description Check a data frame of quadrat data for valid numeric data: number must be between given min and max values
+#' @description Check a data frame of quadrat data for invalid numeric data. Specify the allowed range by min and max values,
+#'   and whether the allowed range should include the min and max values.
 #'
-#' @param df Data frame of quadrat data to validate
-#' @param column_name Name of column in df to check
+#' @param df Data frame of quadrat data
+#' @param column_name Name of column in df to be checked
 #' @param min_val Minimum allowed value; default = -Inf
 #' @param max_val Maximum allowed value; default = Inf
 #' @param allow_min T/F: T = indicated minimum value is an allowed value; F = minimum value is not an allowed value. default = T
@@ -105,16 +115,19 @@ check_numeric_range = function(df, column_name, min_val = -Inf, max_val = Inf, a
   return(invalidnum)
 }
 
-#' @title Find duplicate rows
-#' @description Check a data frame of quadrat data for duplicate data (possibly data entry error). User supplies list of column names that should define a unique entry (e.g. quadrat, date, species should be associated with a single value). Ignores rows with NA or missing values in the key columns
+#' Find duplicate rows
 #'
-#' @param df Data frame of quadrat data to validate
-#' @param columns Vector of column names that determine unique key
+#' @description Check a data frame of quadrat data for duplicate data (possibly data entry error). User supplies
+#'   list of "key" column names that should define a unique entry (e.g. quadrat, date, species should be associated with
+#'   a single count value). This function ignores rows with NA or missing values in the key columns.
+#'
+#' @param df Data frame of quadrat data
+#' @param columns Vector of column names that determine unique key. (e.g. columns = c('quadrat', 'date', 'species'))
 #'
 #' @return Rows from df that are duplicates according to the given key, plus an additional column indicating error_type.
 #'         If there are no errors, this will return an empty data frame.
 #' @export
-#' @examples find_duplicate_rows(df, columns = c('quadrat','year','month','USDA_code'))
+#' @examples find_duplicate_rows(df, columns = c('quadrat', 'year', 'month', 'USDA_code'))
 #'
 find_duplicate_rows = function(df, columns) {
   df_selected = df[,columns]

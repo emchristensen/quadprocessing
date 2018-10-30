@@ -2,15 +2,15 @@
 % Please edit documentation in R/quadrat_qc_functions.R
 \name{check_numeric_range}
 \alias{check_numeric_range}
-\title{Check numeric range}
+\title{Check for invalid numeric range}
 \usage{
 check_numeric_range(df, column_name, min_val = -Inf, max_val = Inf,
   allow_min = T, allow_max = T)
 }
 \arguments{
-\item{df}{Data frame of quadrat data to validate}
+\item{df}{Data frame of quadrat data}
 
-\item{column_name}{Name of column in df to check}
+\item{column_name}{Name of column in df to be checked}
 
 \item{min_val}{Minimum allowed value; default = -Inf}
 
@@ -25,7 +25,8 @@ Rows from df containing values outside valid range, plus additional columns indi
         If there are no errors, this will return an empty data frame.
 }
 \description{
-Check a data frame of quadrat data for valid numeric data: number must be between given min and max values
+Check a data frame of quadrat data for invalid numeric data. Specify the allowed range by min and max values,
+  and whether the allowed range should include the min and max values.
 }
 \examples{
 check_numeric_range(df, column_name = 'area', min_val = 0, max_val = 1, allow_min=F, allow_max=T)

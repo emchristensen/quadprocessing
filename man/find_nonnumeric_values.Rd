@@ -2,21 +2,23 @@
 % Please edit documentation in R/quadrat_qc_functions.R
 \name{find_nonnumeric_values}
 \alias{find_nonnumeric_values}
-\title{Find non-numeric data in data column}
+\title{Find non-numeric data in a given column from a data frame}
 \usage{
 find_nonnumeric_values(df, column_name)
 }
 \arguments{
-\item{df}{Data frame of quadrta data to validate}
+\item{df}{Data frame of quadrta data}
 
-\item{column_name}{Name of column in df containing numeric data (e.g. density/area/perimeter)}
+\item{column_name}{Name of column in df containing numeric data (e.g. 'area')}
 }
 \value{
 Rows from df containing non-numeric density/area values, plus additional columns indicating error_type and error_value.
         If there are no errors, this will return an empty data frame.
 }
 \description{
-Check a data frame of quadrat data for valid count/area data. Indicate name of column that should contain only numeric data (e.g. counts, area, or perimeter). Returns rows that are non-numeric or NA and missing values
+Check a data frame of quadrat data for invalid numeric data. The name of column to be checked must
+  be indicated (e.g. counts, area, perimeter). This function returns rows from the original data frame that contain
+  non-numeric (or NA or missing values) in the indicated column.
 }
 \examples{
 find_nonnumeric_values(df, column_name = 'density')
