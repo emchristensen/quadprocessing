@@ -32,6 +32,8 @@ add_date_info = function(df, date_df) {
 #' @param df data frame of polygon data created by readOGR
 #' @param sp_list data frame of species information
 #'
+#' @export
+#'
 error_check_polygon = function(df, sp_list) {
   # remove 'plot boundary' row
   plot_boundary = df[df$Plant == 'Plot boundary',]
@@ -62,6 +64,8 @@ error_check_polygon = function(df, sp_list) {
 #' @param quad_info information about quadrat name and year gleaned from layer file name
 #' @param sp_list data frame of species information
 #' @param dates_df data frame of quadrat sampling dates
+#'
+#' @export
 #'
 create_cover_df = function(df, quad_info, sp_list, dates_df) {
   quad = quad_info[1]
@@ -94,6 +98,8 @@ create_cover_df = function(df, quad_info, sp_list, dates_df) {
 #' @param df data frame of point data created by readOGR
 #' @param sp_list data frame of species information
 #'
+#' @export
+#'
 error_check_point = function(df, sp_list) {
   # check species names valid (and finds NA/missing values)
   badcodes = check_species_codes(df, column_name = 'Plant', specieslist = sp_list$USDA_code)
@@ -110,6 +116,8 @@ error_check_point = function(df, sp_list) {
 #' @param quad_info information about quadrat name and year gleaned from layer file name
 #' @param sp_list data frame of species information
 #' @param dates_df data frame of quadrat sampling dates
+#'
+#' @export
 #'
 create_count_df = function(df, quad_info, sp_list, dates_df) {
   quad = quad_info[1]
