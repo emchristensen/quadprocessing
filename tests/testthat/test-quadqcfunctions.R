@@ -7,7 +7,7 @@ testfile = '../quadrat_test_data.csv'
 testdat = read.csv(testfile, stringsAsFactors = F)
 
 # supplementary files
-splist = read.csv('../test_JRN_plant_species.csv', stringsAsFactors = F)
+sp_list = read.csv('../test_JRN_plant_species.csv', stringsAsFactors = F)
 quaddates = read.csv('../test_quadrat_dates.csv', stringsAsFactors = F)
 quadlist = unique(quaddates$quadrat)
 
@@ -17,7 +17,7 @@ test_that("check_quadrat_names catches invalid quadrat names", {
 })
 
 test_that("check_species_codes catches invalid species codes", {
-  expect_equal(check_species_codes(testdat,column_name='USDA_code',specieslist=splist$USDA_code),
+  expect_equal(check_species_codes(testdat,column_name='USDA_code',specieslist=sp_list$USDA_code),
                cbind(testdat[c(5,14,20,29,40),], error_type=rep('speciescode',5),
                      error_value=c('pecti','2FORB','2PLANT','2PLANT',''),stringsAsFactors=F))
 })
