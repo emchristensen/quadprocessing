@@ -62,17 +62,22 @@ error_check_polygon = function(df, sp_list) {
 #'
 #' @param df data frame of polygon data created by readOGR
 #' @param quad_info information about quadrat name and year gleaned from layer file name
-#' @param sp_list data frame of species information
-#' @param dates_df data frame of quadrat sampling dates
+#'
+#' @return returns a data frame with columns: quadrat, year, species_code, area, perimeter
 #'
 #' @export
 #'
-create_cover_df = function(df, quad_info, sp_list, dates_df) {
+create_cover_df = function(df, quad_info) {
   quad = quad_info[1]
   year = quad_info[2]
 
+  # if plot is empty
+  if (nrow(df)==0){
+    df = data.frame(Plant='2BARE',SHAPE_Length=4,SHAPE_Area=1)
+  }
+
   # rename columns
-  df = dplyr::rename(df, area = SHAPE_Area, perimeter = SHAPE_Length, USDA_code = Plant)
+  df = dplyr::rename(df, area = SHAPE_Area, perimeter = SHAPE_Length, species_code = Plant)
 
   # construct rest of data frame
   layer_df = df
@@ -80,13 +85,7 @@ create_cover_df = function(df, quad_info, sp_list, dates_df) {
   layer_df$quadrat = rep(quad)
   layer_df$year = rep(year)
 
-  # merge with species info
-  layer_df_sp = add_species_info(layer_df, column_name = 'USDA_code', sp_list)
-
-  # merge with date info (add month column)
-  layer_df_sp_date = add_date_info(layer_df_sp, dates_df)
-
-  cover_df = dplyr::select(layer_df_sp_date, quadrat, year, month, USDA_code, scientific_name, duration, form, area, perimeter)
+  cover_df = dplyr::select(layer_df, quadrat, year, species_code, area, perimeter)
 
   return(cover_df)
 }
@@ -114,12 +113,10 @@ error_check_point = function(df, sp_list) {
 #'
 #' @param df data frame of point data created by readOGR
 #' @param quad_info information about quadrat name and year gleaned from layer file name
-#' @param sp_list data frame of species information
-#' @param dates_df data frame of quadrat sampling dates
 #'
 #' @export
 #'
-create_count_df = function(df, quad_info, sp_list, dates_df) {
+create_count_df = function(df, quad_info) {
   quad = quad_info[1]
   year = quad_info[2]
 
@@ -133,19 +130,13 @@ create_count_df = function(df, quad_info, sp_list, dates_df) {
   layer_df$quadrat = rep(quad)
   layer_df$year = rep(year)
 
-  # merge with species info
-  layer_df_sp = add_species_info(layer_df, column_name = 'Plant', sp_list)
-
-  # merge with date info (add month column)
-  layer_df_sp_date = add_date_info(layer_df_sp, dates_df)
-
   # fix species column name
-  layer_df_sp_date = dplyr::rename(layer_df_sp_date, USDA_code = Plant)
+  layer_df = dplyr::rename(layer_df, species_code = Plant)
 
   # if bare ground is recorded ('2BARE') make count = 0
-  layer_df_sp_date$count[layer_df_sp_date$USDA_code == '2BARE'] <- 0
+  layer_df$count[layer_df$species_code == '2BARE'] <- 0
 
-  count_df = dplyr::select(layer_df_sp_date, quadrat, year, month, USDA_code, scientific_name, duration, form, count)
+  count_df = dplyr::select(layer_df, quadrat, year, species_code, count)
 
   return(count_df)
 }
