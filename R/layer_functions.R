@@ -71,21 +71,23 @@ create_cover_df = function(df, quad_info) {
   quad = quad_info[1]
   year = quad_info[2]
 
-  # if plot is empty
-  if (nrow(df)==0){
-    df = data.frame(Plant='2BARE',SHAPE_Length=4,SHAPE_Area=1)
-  }
+  # # remove "Plot boundary"
+  # df1 <- df[!(df$Plant == "Plot boundary"),]
+  #
+  # # if plot is empty
+  # if (nrow(df1)==0){
+  #   df1 = data.frame(Plant='2BARE',SHAPE_Length=4,SHAPE_Area=1)
+  # }
 
   # rename columns
   df = dplyr::rename(df, area = SHAPE_Area, perimeter = SHAPE_Length, species_code = Plant)
 
   # construct rest of data frame
   layer_df = df
-  layer_df$count = rep(1)
   layer_df$quadrat = rep(quad)
-  layer_df$year = rep(year)
+  layer_df$project_year = rep(year)
 
-  cover_df = dplyr::select(layer_df, quadrat, year, species_code, area, perimeter)
+  cover_df = dplyr::select(layer_df, quadrat, project_year, species_code, area, perimeter)
 
   return(cover_df)
 }
@@ -128,7 +130,7 @@ create_count_df = function(df, quad_info) {
   # construct rest of data frame
   layer_df = df_agg
   layer_df$quadrat = rep(quad)
-  layer_df$year = rep(year)
+  layer_df$project_year = rep(year)
 
   # fix species column name
   layer_df = dplyr::rename(layer_df, species_code = Plant)
@@ -136,7 +138,7 @@ create_count_df = function(df, quad_info) {
   # if bare ground is recorded ('2BARE') make count = 0
   layer_df$count[layer_df$species_code == '2BARE'] <- 0
 
-  count_df = dplyr::select(layer_df, quadrat, year, species_code, count)
+  count_df = dplyr::select(layer_df, quadrat, project_year, species_code, count)
 
   return(count_df)
 }
