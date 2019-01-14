@@ -80,7 +80,8 @@ create_cover_df = function(df, quad_info) {
   # }
 
   # rename columns
-  df = dplyr::rename(df, area = SHAPE_Area, perimeter = SHAPE_Length, species_code = Plant)
+  names(df) <- tolower(names(df))
+  df = dplyr::rename(df, area = shape_area, perimeter = shape_length, species_code = plant)
 
   # construct rest of data frame
   layer_df = df
@@ -122,9 +123,11 @@ create_count_df = function(df, quad_info) {
   quad = quad_info[1]
   year = quad_info[2]
 
+  names(df) <- tolower(names(df))
+
   # aggregate by species
   df$count = rep(1)
-  df_agg = aggregate(df$count, by=list(Plant = df$Plant), FUN=sum)
+  df_agg = aggregate(df$count, by=list(plant = df$plant), FUN=sum)
   df_agg = dplyr::rename(df_agg, count = x)
 
   # construct rest of data frame
@@ -133,7 +136,7 @@ create_count_df = function(df, quad_info) {
   layer_df$project_year = rep(year)
 
   # fix species column name
-  layer_df = dplyr::rename(layer_df, species_code = Plant)
+  layer_df = dplyr::rename(layer_df, species_code = plant)
 
   # if bare ground is recorded ('2BARE') make count = 0
   layer_df$count[layer_df$species_code == '2BARE'] <- 0
