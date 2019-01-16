@@ -79,9 +79,10 @@ create_cover_df = function(df, quad_info) {
   #   df1 = data.frame(Plant='2BARE',SHAPE_Length=4,SHAPE_Area=1)
   # }
 
-  # rename columns
+  # select and rename columns
   names(df) <- tolower(names(df))
-  df = dplyr::rename(df, area = shape_area, perimeter = shape_length, species_code = plant)
+  df = df %>% dplyr::select(shape_area, shape_length, plant) %>%
+    dplyr::rename(area = shape_area, perimeter = shape_length, species_code = plant)
 
   # construct rest of data frame
   layer_df = df
