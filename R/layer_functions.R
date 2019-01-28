@@ -94,6 +94,37 @@ create_cover_df = function(df, quad_info) {
   return(cover_df)
 }
 
+#' @title create cover data frame pre-1995 data
+#' @description creates data frame of cover data from polygon data layer from gdb
+#'
+#' @param df data frame of polygon data created by readOGR
+#' @param quad_info information about quadrat name and year gleaned from layer file name
+#'
+#' @return returns a data frame with columns: quadrat, year, species_code, area, perimeter
+#'
+#' @export
+#'
+create_cover_df_pre95 = function(df, quad_info) {
+  quad = quad_info[1]
+  year = quad_info[2]
+  month = quad_info[3]
+
+  # select and rename columns
+  names(df) <- tolower(names(df))
+  df = df %>% dplyr::select(area, length, species) %>%
+    dplyr::rename(perimeter = length, species_name = species)
+
+  # construct rest of data frame
+  layer_df = df
+  layer_df$quadrat = rep(quad)
+  layer_df$year = rep(year)
+  layer_df$month = rep(month)
+
+  cover_df = dplyr::select(layer_df, quadrat, year, month, species_name, area, perimeter)
+
+  return(cover_df)
+}
+
 
 #' @title error check point data frame
 #' @description checks point layer of quadrat data from a gdb file for errors
@@ -143,6 +174,43 @@ create_count_df = function(df, quad_info) {
   layer_df$count[layer_df$species_code == '2BARE'] <- 0
 
   count_df = dplyr::select(layer_df, quadrat, project_year, species_code, count)
+
+  return(count_df)
+}
+
+#' @title create count data frame for pre-1995 data
+#' @description creates data frame of count data from point data layer from gdb
+#'
+#' @param df data frame of point data created by readOGR
+#' @param quad_info information about quadrat name and year gleaned from layer file name
+#'
+#' @export
+#'
+create_count_df_pre95 = function(df, quad_info) {
+  quad = quad_info[1]
+  year = quad_info[2]
+  month = quad_info[3]
+
+  names(df) <- tolower(names(df))
+
+  # aggregate by species
+  df$count = rep(1)
+  df_agg = aggregate(df$count, by=list(species = df$species), FUN=sum)
+  df_agg = dplyr::rename(df_agg, count = x)
+
+  # construct rest of data frame
+  layer_df = df_agg
+  layer_df$quadrat = rep(quad)
+  layer_df$year = rep(year)
+  layer_df$month = rep(month)
+
+  # fix species column name
+  layer_df = dplyr::rename(layer_df, species_name = species)
+
+  # if bare ground is recorded ('2BARE') make count = 0
+  #layer_df$count[layer_df$species_code == '2BARE'] <- 0
+
+  count_df = dplyr::select(layer_df, quadrat, year, month, species_name, count)
 
   return(count_df)
 }
