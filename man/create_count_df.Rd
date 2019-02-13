@@ -4,16 +4,14 @@
 \alias{create_count_df}
 \title{create count data frame}
 \usage{
-create_count_df(df, quad_info, sp_list, dates_df)
+create_count_df(df, quad_info, desired_columns)
 }
 \arguments{
 \item{df}{data frame of point data created by readOGR}
 
 \item{quad_info}{information about quadrat name and year gleaned from layer file name}
 
-\item{sp_list}{data frame of species information}
-
-\item{dates_df}{data frame of quadrat sampling dates}
+\item{desired_columns}{vector of column names that should be extracted from the attribute table}
 }
 \description{
 creates data frame of count data from point data layer from gdb

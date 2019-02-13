@@ -4,16 +4,17 @@
 \alias{create_cover_df}
 \title{create cover data frame}
 \usage{
-create_cover_df(df, quad_info, sp_list, dates_df)
+create_cover_df(df, quad_info, desired_columns)
 }
 \arguments{
 \item{df}{data frame of polygon data created by readOGR}
 
 \item{quad_info}{information about quadrat name and year gleaned from layer file name}
 
-\item{sp_list}{data frame of species information}
-
-\item{dates_df}{data frame of quadrat sampling dates}
+\item{desired_columns}{vector of column names that should be extracted from the attribute table}
+}
+\value{
+returns a data frame with columns: quadrat, year, species_code, area, perimeter
 }
 \description{
 creates data frame of cover data from polygon data layer from gdb
